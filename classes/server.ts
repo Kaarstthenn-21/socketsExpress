@@ -38,17 +38,19 @@ export default class ServerBase {
 
     private escucharSockets() {
         console.log("Conexiones");
-        this.io.on("connection", (cliente) => {       
-            
-            socket.conectarCliente(cliente);
-            
+        this.io.on("connection", (cliente) => {
+
+            socket.conectarCliente(cliente, this.io);
+
             //Configurando Usuario
             socket.login(cliente, this.io);
             // Mensaje
             socket.mensaje(cliente, this.io);
 
+            //Obtener Usuarios activos
+            socket.ObtenerUsuarios(cliente, this.io);
             // Disconnect
-            socket.disconnect(cliente);
+            socket.disconnect(cliente, this.io);
         })
     }
 
