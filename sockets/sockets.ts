@@ -45,7 +45,7 @@ export const login = (cliente: Socket, io: Server) => {
 // Obtener usuarios
 export const ObtenerUsuarios = (cliente: Socket, io: Server) => {
     cliente.on('obtener-usuarios', () => {
-        io.emit('usuarios-activos', usuariosConectados.getList());
+        io.to(cliente.id).emit('usuarios-activos', usuariosConectados.getList());
 
     })
 }
